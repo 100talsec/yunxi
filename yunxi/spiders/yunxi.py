@@ -4,8 +4,14 @@ from scrapy.http import Request, FormRequest
 import json
 
 class YunSee(scrapy.Spider):
+    def _init_(self,search_host = None):
+        if search_host is None:
+             print '-a search_host =url'
+        else:
+             self.search_host=search_host
     name = 'yunxi'
-    search_host = None
+   # search_host = None
+
     headers = {
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'Accept-Encoding': 'gzip, deflate',
@@ -53,6 +59,7 @@ if __name__ == '__main__':
     import os
     os.environ['SCRAPY_SETTINGS_MODULE'] = 'yunxi.settings'
     process = CrawlerProcess()
-	#search_host = sys.argv[1]
-    process.crawl(YunSee,search_host='www.100tal.com')
+    #search_host = sys.argv[1]
+    #process.crawl(YunSee,search_host='www.baidu.com')
+    process.crawl(YunSee,search_host)
     process.start()
